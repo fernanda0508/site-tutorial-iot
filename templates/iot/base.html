@@ -1,0 +1,107 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Seu Site{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        azul: {
+                            claro: '#C5DFFF',
+                            escuro: '#061E3C',
+                            hover: '#1057B0'
+                        },
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                },
+            },
+        };
+    </script>
+    <script src="{% static 'iot/js/script.js' %}"></script>
+    {% block extra_head %}{% endblock %}
+</head>
+
+<body class="bg-azul-claro text-azul-escuro font-inter">
+
+    <header class="bg-azul-escuro py-4">
+        <div class="container mx-auto flex items-center justify-between">
+            <!-- Logo -->
+            <div class="text-white text-2xl font-semibold">
+                <a href="/">Experimentando IoT</a>
+            </div>
+            <!-- Barra de pesquisa -->
+            <div class="hidden lg:block">
+                <form>
+                    <input type="text" placeholder="Pesquisar..."
+                        class="rounded-l-lg px-4 py-2 bg-white text-azul-escuro border border-white focus:outline-none">
+                    <button class="bg-azul-hover text-white px-4 py-2 rounded-r-lg hover:bg-hover">
+                        Pesquisar
+                    </button>
+                </form>
+            </div>
+
+
+
+
+
+    </header>
+
+    <!-- Menu de navegação -->
+
+    <!-- Ícone do menu (inicialmente visível apenas em telas menores) -->
+    <div id="menu-icon" class="lg:hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+    </div>
+
+    <!-- Menu (inicialmente visível apenas em telas maiores) -->
+    <nav id="menu" class="hidden lg:block bg-azul-escuro text-white py-4">
+        <div class="container mx-auto flex items-center justify-center">
+            <ul class="space-x-6">
+                <li class="inline">
+                    <a href="/" class="hover:text-hover font-semibold">Home</a>
+                </li>
+                <li class="inline">
+                    <span class="lg:hidden text-gray-500">|</span>
+                    <!-- Barra vertical visível apenas em telas pequenas -->
+                </li>
+                <li class="inline">
+                    <a href="/favoritos" class="hover:text-hover font-semibold">Favoritos</a>
+                </li>
+                <li class="inline">
+                    <span class="lg:hidden text-gray-500">|</span>
+                    <!-- Barra vertical visível apenas em telas pequenas -->
+                </li>
+                <li class="inline">
+                    <a href="/quem-somos" class="hover:text-hover font-semibold">Quem Somos</a>
+                </li>
+                <li class="inline">
+                    <span class="lg:hidden text-gray-500">|</span>
+                    <!-- Barra vertical visível apenas em telas pequenas -->
+                </li>
+                <li class="inline">
+                    <a href="/contato" class="hover:text-hover font-semibold">Contato</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Conteúdo da página -->
+    <div class="container mx-auto mt-4">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+
+</html>

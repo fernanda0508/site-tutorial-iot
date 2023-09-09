@@ -1,0 +1,18 @@
+{% extends 'iot/base.html' %}
+{% load static %}
+{% block content %}
+<main class="container mx-auto mt-4">
+    <!-- Seu conteúdo da página inicial aqui -->
+
+    <div class="max-w-sm rounded overflow-hidden shadow-lg">
+        <img class="w-full" src="{% static 'iot/imagens/led.png' %}"  alt="Nome da Imagem">
+        <div class="px-6 py-4">
+          <div class="font-bold text-xl mb-2">Título do Card</div>
+          <p class="text-gray-700 text-base">
+            Descrição do Card. Você pode adicionar informações adicionais aqui.
+          </p>
+        </div>
+      </div>
+      
+</main>
+{% endblock %}
