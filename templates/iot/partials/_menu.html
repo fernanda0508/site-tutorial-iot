@@ -1,0 +1,39 @@
+<!-- Menu (inicialmente visível apenas em telas maiores) -->
+<nav id="menu" class="hidden lg:block bg-azul-escuro text-white py-4">
+    <div class="container mx-auto flex items-center justify-center">
+        <ul class="space-x-6">
+            <li class="inline">
+                <a href="/" class="hover:text-hover font-semibold">Home</a>
+            </li>
+            <li class="inline">
+                <span class="lg:hidden text-gray-500">|</span>
+                <!-- Barra vertical visível apenas em telas pequenas -->
+            </li>
+            <li class="inline">
+                <a href="/favoritos" class="hover:text-hover font-semibold">Favoritos</a>
+            </li>
+            <li class="inline">
+                <span class="lg:hidden text-gray-500">|</span>
+                <!-- Barra vertical visível apenas em telas pequenas -->
+            </li>
+            <li class="inline">
+                <a href="/quem-somos" class="hover:text-hover font-semibold">Quem Somos</a>
+            </li>
+            <li class="inline">
+                <span class="lg:hidden text-gray-500">|</span>
+                <!-- Barra vertical visível apenas em telas pequenas -->
+            </li>
+            <li class="inline">
+                <a href="/contato" class="hover:text-hover font-semibold">Contato</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Ícone do menu (inicialmente visível apenas em telas menores) -->
+<div id="menu-icon" class="lg:hidden">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500" fill="none" viewBox="0 0 24 24"
+        stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+    </svg>
+</div>

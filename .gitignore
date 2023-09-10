@@ -2,3 +2,14 @@ venv/
 env/
 .env
 .venv
+
+# Arquivos temporários
+*.pyc
+__pycache__
+
+# Arquivos de log
+*.log
+
+
+# Diretório node_modules
+node_modules/
