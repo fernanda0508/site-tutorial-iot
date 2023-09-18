@@ -1,0 +1,17 @@
+<!-- Lista de Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-6 mb-6">
+  {% for card in cards %}
+  <div class="max-w-sm rounded overflow-hidden shadow-lg">
+    <img class="w-full" src="{{ card.imagem_card.url }}" alt="{{ card.titulo }}">
+    <div class="px-6 py-4">
+      <div class="font-bold text-xl mb-2">{{ card.titulo }}</div>
+      <p class="text-gray-700 text-base">{{ card.introducao }}</p>
+      <a href="{% url 'tutorial-card' card.id %}">Ver Mais...</a>
+    </div>
+    <div class="px-6 pt-4 pb-2">
+      <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">#Tag1</span>
+      <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">#Tag2</span>
+    </div>
+  </div>
+  {% endfor %}
+</div>

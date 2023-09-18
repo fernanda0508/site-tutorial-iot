@@ -1,4 +1,21 @@
 from django.contrib import admin
-from iot.models import Card
-# Register your models here.
-admin.site.register(Card)
+from iot.models import Card, Circuito, MateriaisExperimento
+
+
+class CircuitoInline(admin.StackedInline):
+    model = Circuito
+    extra = 1
+
+
+class MateriaisExperimentoInline(admin.StackedInline):
+    model = MateriaisExperimento
+    extra = 1
+
+
+@admin.register(Card)
+class CardAdmin(admin.ModelAdmin):
+    inlines = [CircuitoInline, MateriaisExperimentoInline]
+
+
+admin.site.register(Circuito)
+admin.site.register(MateriaisExperimento)

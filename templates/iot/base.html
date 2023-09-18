@@ -30,29 +30,11 @@
     <script src="{% static 'iot/js/script.js' %}"></script>
 
 
+
     {% block extra_head %}{% endblock %}
 </head>
 
 <body class="bg-azul-claro text-azul-escuro font-inter">
-
-    <header class="bg-azul-escuro py-4">
-        <div class="container mx-auto flex items-center justify-between">
-            <!-- Logo -->
-            <div class="text-white text-2xl font-semibold">
-                <a href="/">Experimentando IoT</a>
-            </div>
-            <!-- Barra de pesquisa -->
-            <div class="hidden lg:block">
-                <form>
-                    <input type="text" placeholder="Pesquisar..."
-                        class="rounded-l-lg px-4 py-2 bg-white text-azul-escuro border border-white focus:outline-none">
-                    <button class="bg-azul-hover text-white px-4 py-2 rounded-r-lg hover:bg-hover">
-                        Pesquisar
-                    </button>
-                </form>
-            </div>
-
-    </header>
 
     <!-- Menu de navegação -->
 
@@ -63,7 +45,11 @@
     <div class="container mx-auto mt-4">
         {% block content %}{% endblock %}
     </div>
+
+    <!-- Rodapé -->
+    {% include 'iot/partials/_rodape.html' with year=year %}
     <script src="https://unpkg.com/flowbite@1.4.0/dist/flowbite.js"></script>
+
 </body>
 
 </html>

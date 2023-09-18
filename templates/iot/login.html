@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <!-- Inclua os estilos do Tailwind CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+  <div class="bg-white p-8 rounded shadow-md w-96">
+    <h2 class="text-2xl font-semibold mb-6">Login</h2>
+    {% if error_message %}
+    <p class="text-red-500 mb-4">{{ error_message }}</p>
+    {% endif %}
+    <form action="" method="post">
+      {% csrf_token %}
+      <!-- Campo de usuário -->
+      <div class="mb-4">
+        <label for="username" class="block text-sm font-medium text-gray-700">Usuário</label>
+        <input type="text" name="username" id="username"
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+      </div>
+      <!-- Campo de senha -->
+      <div class="mb-6">
+        <label for="password" class="block text-sm font-medium text-gray-700">Senha</label>
+        <input type="password" name="password" id="password"
+          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+      </div>
+      <!-- Botão de login -->
+      <div class="text-center">
+        <button type="submit"
+          class="bg-indigo-500 text-white px-4 py-2 rounded hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:ring-opacity-75">
+          Entrar
+        </button>
+      </div>
+    </form>
+    <div class="text-center">
+      <p class="mt-2 text-sm text-gray-600">
+        Ainda não tem uma conta? <a href="{% url 'cadastro' %}"
+          class="font-medium text-indigo-600 hover:text-indigo-500">
+          Faça Cadastro
+        </a>
+      </p>
+    </div>
+  </div>
+</body>
+
+</html>

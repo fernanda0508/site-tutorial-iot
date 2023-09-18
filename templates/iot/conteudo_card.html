@@ -1,0 +1,55 @@
+{% extends 'iot/base.html' %}
+{% load static %}
+
+{% block content %}
+<main class="container mx-auto mt-4  ">
+  <div class="max-w-screen-lg mx-auto text-justify font-sans bg-white bg-opacity-80 p-4 shadow-lg rounded-lg">
+
+    <h1 class="text-3xl font-bold font-sans text-center">{{ card.titulo }}</h1>
+    <img src="{{ card.imagem_principal_conteudo.url }}" alt="{{ card.titulo }}" class="my-4 w-full rounded-lg">
+
+    <div>
+      <h1 class="font-bold mt-4 mb-4">Introdução</h1>
+      <p>
+        {{ card.introducao }}
+      </p>
+      <h1 class="font-bold mt-4 mb-4">Lista de Materiais necessários</h1>
+      <ul>
+        {% for material in card.materiaisexperimento_set.all %}
+        <li> {{ forloop.counter }}. {{ material.material }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div>
+      <h1 class="font-bold mt-4 mb-4">Código do Experimento</h1>
+      <p>{{ card.descricao_codigo }}</p>
+      <div class="bg-slate-700 p-4 mt-4 rounded-lg"> <!-- Fundo preto para a área do código -->
+        <pre class="text-white">
+          <code class="language-html "> 
+            {{ card.codigo }}
+          </code>
+        </pre>
+      </div>
+    </div>
+
+
+    <div>
+      <h1 class="font-bold mt-4 mb-4">Passo a Passo do Circuito</h1>
+      <ol>
+        {% for circuito in card.circuito_set.all %}
+        <li>{{ forloop.counter }}. {{ circuito.passo_a_passo_circuito }}</li>
+        {% endfor %}
+      </ol>
+    </div>
+
+    <img src="{{ card.imagem_circuito.url }}" alt="{{ card.titulo }}" class="my-4 rounded-lg w-full">
+  </div>
+
+
+
+  <hr class="my-4">
+
+  </div>
+</main>
+{% endblock %}
