@@ -49,3 +49,12 @@ def cadastro(request):
     else:
         form = UserCreationForm()
     return render(request, "iot/cadastro.html", {"form": form})
+
+
+def buscar(request):
+    cards = Card.objects.all()
+    if "buscar" in request.GET:
+        nome_a_buscar = request.GET["buscar"]
+        if nome_a_buscar:
+            cards = cards.filter(titulo__icontains=nome_a_buscar)
+    return render(request, "iot/buscar.html", {"cards": cards})

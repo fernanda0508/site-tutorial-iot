@@ -1,5 +1,5 @@
 from django.urls import path
-from iot.views import index, tutorial_card, login_view, cadastro
+from iot.views import index, tutorial_card, login_view, cadastro, buscar
 from django.contrib.auth import views as auth_views
 
 
@@ -9,4 +9,5 @@ urlpatterns = [
     path("login/", login_view, name="login"),
     path("logout/", auth_views.LogoutView.as_view(next_page="login"), name="logout"),
     path("cadastro/", cadastro, name="cadastro"),
+    path("buscar", buscar, name="buscar"),
 ]
