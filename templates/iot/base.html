@@ -29,6 +29,8 @@
     </script>
     <script src="{% static 'iot/js/script.js' %}"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 
 
@@ -51,6 +53,33 @@
     <!-- Rodapé -->
     {% include 'iot/partials/_rodape.html' with year=year %}
     <script src="https://unpkg.com/flowbite@1.4.0/dist/flowbite.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".favorite-button").on("click", function (event) {
+                event.preventDefault(); //evita o comportamento padrão de um link 
+
+                // obtém o cardId e o ícone do coração associado ao botão.
+                const cardId = $(this).data("card-id");
+                const heartIcon = $(`.heart-icon[data-card-id="${cardId}"]`);
+
+                // Alternar a classe de ícone do coração
+                heartIcon.toggleClass("far").toggleClass("fas");
+
+                // Fazer uma solicitação AJAX para adicionar/remover dos favoritos
+                $.ajax({
+                    type: "GET",
+                    url: `/add_to_favorites/${cardId}/`,
+                    dataType: "json",
+                    success: function (data) {
+                        // Redirecionar para a página inicial após o sucesso da solicitação
+                    },
+                    error: function (error) {
+                        console.error("Erro ao adicionar/remover dos favoritos:", error);
+                    },
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>

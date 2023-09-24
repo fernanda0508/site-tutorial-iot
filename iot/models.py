@@ -17,6 +17,10 @@ class Card(models.Model):
     def __str__(self) -> str:
         return self.titulo
 
+    def is_favorited_by(self, user):
+        #  verifica se um determinado usuário favoritou o card.
+        return Favorite.objects.filter(card=self, user=user).exists()
+
 
 class MateriaisExperimento(models.Model):
     card = models.ForeignKey(Card, on_delete=models.CASCADE, null=False, blank=True)

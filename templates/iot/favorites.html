@@ -7,7 +7,17 @@
   <div class="max-w-sm rounded overflow-hidden shadow-lg">
     <img class="w-full" src="{{ favorite.card.imagem_card.url }}" alt="{{ favorite.card.titulo }}">
     <div class="px-6 py-4">
-      <div class="font-bold text-xl mb-2">{{ favorite.card.titulo }}</div>
+      <div class="flex items-center justify-between">
+        <div class="font-bold text-xl mb-2">{{ favorite.card.titulo }}</div>
+        {% if user.is_authenticated %}
+        <a href="{% url 'add_to_favorites' favorite.card.id %}" class="favorite-button"
+          data-card-id="{{ favorite.card.id }}">
+          <!-- Use a classe 'heart-icon' para o ícone do coração -->
+          <i class="heart-icon text-2xl {% if favorite.card.is_favorite.user %}fas{% else %}far{% endif %} fa-heart"
+            data-card-id="{{ favorite.card.id }}"></i>
+        </a>
+        {% endif %}
+      </div>
       <p class="text-gray-700 text-base">{{ favorite.card.introducao }}</p>
       <a href="{% url 'tutorial-card' favorite.card.id %}">Ver Mais...</a>
     </div>

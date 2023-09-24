@@ -6,7 +6,6 @@ from iot.views import (
     cadastro,
     buscar,
     add_to_favorites,
-    remove_from_favorites,
     favorites,
 )
 from django.contrib.auth import views as auth_views
@@ -20,10 +19,5 @@ urlpatterns = [
     path("cadastro/", cadastro, name="cadastro"),
     path("buscar", buscar, name="buscar"),
     path("add_to_favorites/<int:card_id>/", add_to_favorites, name="add_to_favorites"),
-    path(
-        "remove_from_favorites/<int:card_id>/",
-        remove_from_favorites,
-        name="remove_from_favorites",
-    ),
     path("favorites/", favorites, name="favorites"),
 ]

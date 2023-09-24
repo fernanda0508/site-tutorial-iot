@@ -62,24 +62,30 @@ def buscar(request):
     return render(request, "iot/buscar.html", {"cards": cards})
 
 
-@login_required
 def add_to_favorites(request, card_id):
     card = Card.objects.get(pk=card_id)
-    favorite, created = Favorite.objects.get_or_create(user=request.user, card=card)
-    if not created:
-        # O experimento já estava nos favoritos, então agora o usuário deseja removê-lo
-        favorite.delete()
-    return redirect("index")
 
+    # Verifique se o card já está nos favoritos do usuário
+    if request.user.is_authenticated:
+        if card.is_favorited_by(request.user):
+            # O card já estava nos favoritos, então agora o usuário deseja removê-lo
+            Favorite.objects.filter(user=request.user, card=card).delete()
+        else:
+            # O card não estava nos favoritos, então o usuário deseja adicioná-lo
+            Favorite.objects.create(user=request.user, card=card)
 
-@login_required
-def remove_from_favorites(request, card_id):
-    card = Card.objects.get(pk=card_id)
-    Favorite.objects.filter(user=request.user, card=card).delete()
+    # Adicione instruções de depuração para verificar se a view está sendo chamada
+    # corretamente e se as operações estão ocorrendo como esperado.
+    print(f"Card ID: {card_id}")
+    print(f"User: {request.user}")
+
+    # Adicione mais instruções de depuração conforme necessário.
+
     return redirect("index")
 
 
 @login_required
 def favorites(request):
+    # recupera os favoritos do usuário e renderiza a página de favoritos.
     user_favorites = Favorite.objects.filter(user=request.user)
     return render(request, "iot/favorites.html", {"user_favorites": user_favorites})
