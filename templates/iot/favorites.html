@@ -1,0 +1,27 @@
+{% extends 'iot/base.html' %}
+
+{% block content %}
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-6 mb-6">
+  {% if user_favorites %}
+  {% for favorite in user_favorites %}
+  <div class="max-w-sm rounded overflow-hidden shadow-lg">
+    <img class="w-full" src="{{ favorite.card.imagem_card.url }}" alt="{{ favorite.card.titulo }}">
+    <div class="px-6 py-4">
+      <div class="font-bold text-xl mb-2">{{ favorite.card.titulo }}</div>
+      <p class="text-gray-700 text-base">{{ favorite.card.introducao }}</p>
+      <a href="{% url 'tutorial-card' favorite.card.id %}">Ver Mais...</a>
+    </div>
+    <div class="px-6 pt-4 pb-2">
+      {% for tag in favorite.card.tags.all %}
+      <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">{{ tag }}</span>
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+  {% else %}
+  <div class="">
+    <p>Nenhum card favorito encontrado.</p>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

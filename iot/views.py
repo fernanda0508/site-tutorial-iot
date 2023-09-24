@@ -1,7 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
-from .models import Card
+from django.contrib.auth.decorators import login_required
+
+from .models import Card, Favorite
 
 
 def index(request):
@@ -58,3 +60,26 @@ def buscar(request):
         if nome_a_buscar:
             cards = cards.filter(titulo__icontains=nome_a_buscar)
     return render(request, "iot/buscar.html", {"cards": cards})
+
+
+@login_required
+def add_to_favorites(request, card_id):
+    card = Card.objects.get(pk=card_id)
+    favorite, created = Favorite.objects.get_or_create(user=request.user, card=card)
+    if not created:
+        # O experimento já estava nos favoritos, então agora o usuário deseja removê-lo
+        favorite.delete()
+    return redirect("index")
+
+
+@login_required
+def remove_from_favorites(request, card_id):
+    card = Card.objects.get(pk=card_id)
+    Favorite.objects.filter(user=request.user, card=card).delete()
+    return redirect("index")
+
+
+@login_required
+def favorites(request):
+    user_favorites = Favorite.objects.filter(user=request.user)
+    return render(request, "iot/favorites.html", {"user_favorites": user_favorites})
