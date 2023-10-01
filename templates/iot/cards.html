@@ -3,25 +3,32 @@
   {% if cards %}
   {% for card in cards %}
   <div class="max-w-sm rounded overflow-hidden shadow-lg">
-    <img class="w-full" src="{{ card.imagem_card.url }}" alt="{{ card.titulo }}">
-    <div class="px-6 py-4">
-      <div class="flex items-center justify-between">
-        <div class="font-bold text-xl mb-2">{{ card.titulo }}</div>
-        {% if user.is_authenticated %}
-        <a href="{% url 'add_to_favorites' card.id %}" class="favorite-button" data-card-id="{{ card.id }}">
-          <!-- Use a classe 'heart-icon' para o ícone do coração -->
-          <i class="heart-icon text-2xl {% if card.is_favorite.user %}fas{% else %}far{% endif %} fa-heart"
-            data-card-id="{{ card.id }}"></i>
-        </a>
-        {% endif %}
+    <a href="{% url 'tutorial-card' card.id %}" class="block">
+      <img class="w-full" src="{{ card.imagem_card.url }}" alt="{{ card.titulo }}">
+      <div class="px-6 py-4">
+        <div class="flex items-center justify-between">
+          <div class="font-bold text-xl mb-2">{{ card.titulo }}</div>
+          {% if user.is_authenticated %}
+          <a href="{% url 'add_to_favorites' card.id %}" class="favorite-button" data-card-id="{{ card.id }}">
+            <!-- Use a classe 'heart-icon' para o ícone do coração -->
+            <i class="heart-icon text-2xl {% if card.is_favorite.user %}fas{% else %}far{% endif %} fa-heart"
+              data-card-id="{{ card.id }}"></i>
+          </a>
+          {% else %}
+          <a href="{% url 'login' %}" class="favorite-button" data-card-id="{{ card.id }}">
+            <!-- Use a classe 'heart-icon' para o ícone do coração -->
+            <i class="heart-icon text-2xl far fa-heart" data-card-id="{{ card.id }}"></i>
+          </a>
+          {% endif %}
+        </div>
+        <p class="text-gray-700 text-base">{{ card.introducao }}</p>
+
       </div>
-      <p class="text-gray-700 text-base">{{ card.introducao }}</p>
-      <a href="{% url 'tutorial-card' card.id %}">Ver Mais...</a>
-    </div>
-    <div class="px-6 pt-4 pb-2">
-      <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">#Tag1</span>
-      <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">#Tag2</span>
-    </div>
+      <div class="px-6 pt-4 pb-2">
+        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">#Tag1</span>
+        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">#Tag2</span>
+      </div>
+    </a>
   </div>
   {% endfor %}
   {% else %}

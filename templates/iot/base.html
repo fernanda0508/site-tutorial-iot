@@ -53,6 +53,10 @@
     <!-- Rodapé -->
     {% include 'iot/partials/_rodape.html' with year=year %}
     <script src="https://unpkg.com/flowbite@1.4.0/dist/flowbite.js"></script>
+
+    {% if user.is_authenticated %}
+
+    <!-- Script do ícone de favoritos -->
     <script>
         $(document).ready(function () {
             $(".favorite-button").on("click", function (event) {
@@ -80,6 +84,7 @@
             });
         });
     </script>
+    {% endif %}
 </body>
 
 </html>
