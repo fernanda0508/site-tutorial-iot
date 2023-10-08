@@ -76,8 +76,12 @@
                     dataType: "json",
                     success: function (data) {
                         // Redirecionar para a página inicial após o sucesso da solicitação
+
+                        // alert("Adicionado aos Favoritos");
+                        console.log('Adicionado aos Favoritos', data);
                     },
                     error: function (error) {
+                        // alert("Deu erro");
                         console.error("Erro ao adicionar/remover dos favoritos:", error);
                     },
                 });

@@ -14,11 +14,24 @@
         {{ card.introducao }}
       </p>
       <h1 class="font-bold mt-4 mb-4">Lista de Materiais necessários</h1>
-      <ul>
-        {% for material in card.materiaisexperimento_set.all %}
-        <li> {{ forloop.counter }}. {{ material.material }}</li>
-        {% endfor %}
-      </ul>
+
+      <!-- TABELA -->
+      <table class="table-auto">
+        <thead> <!-- cabeçalho da tabela-->
+          <tr>
+            <th class="px-4 py-2">Item</th> <!-- células do cabeçalho-->
+            <th class="px-4 py-2">Material</th>
+          </tr>
+        </thead>
+        <tbody> <!-- Corpo da Tabela -->
+          {% for material in card.materiaisexperimento_set.all %}
+          <tr> <!-- linha -->
+            <td class="border px-4 py-2">{{ forloop.counter }}</td> <!-- Célula -->
+            <td class="border px-4 py-2">{{ material.material }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
 
     <div>
@@ -36,12 +49,26 @@
 
     <div>
       <h1 class="font-bold mt-4 mb-4">Passo a Passo do Circuito</h1>
-      <ol>
-        {% for circuito in card.circuito_set.all %}
-        <li>{{ forloop.counter }}. {{ circuito.passo_a_passo_circuito }}</li>
-        {% endfor %}
-      </ol>
+
+      <!-- TABELA -->
+      <table class="table-auto">
+        <thead>
+          <tr>
+            <th class="px-4 py-2">Passo</th>
+            <th class="px-4 py-2">Descrição</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for circuito in card.circuito_set.all %}
+          <tr>
+            <td class="border px-4 py-2">{{ forloop.counter }}</td>
+            <td class="border px-4 py-2">{{ circuito.passo_a_passo_circuito }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
+
 
     <img src="{{ card.imagem_circuito.url }}" alt="{{ card.titulo }}" class="my-4 rounded-lg w-full">
   </div>
