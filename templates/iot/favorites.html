@@ -11,11 +11,9 @@
         <div class="flex items-center justify-between">
           <div class="font-bold text-xl mb-2">{{ favorite.card.titulo }}</div>
           {% if user.is_authenticated %}
-          <a href="{% url 'add_to_favorites' favorite.card.id %}" class="favorite-button"
-            data-card-id="{{ favorite.card.id }}">
+          <a href="{% url 'add_to_favorites' favorite.card.id %}" class="favorite-button">
             <!-- Use a classe 'heart-icon' para o ícone do coração -->
-            <i class="heart-icon text-2xl {% if favorite.card.is_favorite.user %}fas{% else %}far{% endif %} fa-heart"
-              data-card-id="{{ favorite.card.id }}"></i>
+            <i class="heart-icon text-2xl {% if favorite.card.favorito %}fas{% else %}far{% endif %} fa-heart"></i>
           </a>
           {% endif %}
         </div>
@@ -31,7 +29,7 @@
   </div>
   {% endfor %}
   {% else %}
-  <div class="">
+  <div class="text-center">
     <p>Nenhum card favorito encontrado.</p>
   </div>
   {% endif %}

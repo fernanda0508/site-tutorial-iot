@@ -74,18 +74,15 @@ def add_to_favorites(request, card_id):
             # O card não estava nos favoritos, então o usuário deseja adicioná-lo
             Favorite.objects.create(user=request.user, card=card)
 
-    # Adicione instruções de depuração para verificar se a view está sendo chamada
-    # corretamente e se as operações estão ocorrendo como esperado.
-    print(f"Card ID: {card_id}")
-    print(f"User: {request.user}")
-
-    # Adicione mais instruções de depuração conforme necessário.
+        # Atualize o estado de favorito do card e salve-o
+        card.favorito = not card.favorito
+        card.save()
 
     return redirect("index")
 
 
 @login_required
 def favorites(request):
-    # recupera os favoritos do usuário e renderiza a página de favoritos.
-    user_favorites = Favorite.objects.filter(user=request.user)
+    # Recupera os favoritos do usuário e renderiza a página de favoritos.
+    user_favorites = Favorite.objects.select_related("card").filter(user=request.user)
     return render(request, "iot/favorites.html", {"user_favorites": user_favorites})
