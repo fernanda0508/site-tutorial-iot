@@ -39,15 +39,10 @@ def cadastro(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            # Autenticar o usuário após o cadastro
-            username = form.cleaned_data.get("username")
-            password = form.cleaned_data.get("password1")
-            user = authenticate(username=username, password=password)
-            if user:
-                login(request, user)
-                return redirect(
-                    "index"
-                )  # Redirecionar para a página inicial após o cadastro
+            login(request, user)
+            return redirect(
+                "index"
+            )  # Redirecione para a página inicial ou outra página desejada após o registro
     else:
         form = UserCreationForm()
     return render(request, "iot/cadastro.html", {"form": form})
