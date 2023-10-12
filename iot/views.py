@@ -78,7 +78,7 @@ def add_to_favorites(request, card_id):
         card.favorito = not card.favorito
         card.save()
 
-    return redirect("index")
+    return redirect(request.META.get("HTTP_REFERER"))
 
 
 @login_required
