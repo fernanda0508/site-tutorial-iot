@@ -7,6 +7,7 @@ from iot.views import (
     buscar,
     add_to_favorites,
     favorites,
+    contato,
 )
 from django.contrib.auth import views as auth_views
 
@@ -20,4 +21,5 @@ urlpatterns = [
     path("buscar", buscar, name="buscar"),
     path("add_to_favorites/<int:card_id>/", add_to_favorites, name="add_to_favorites"),
     path("favorites/", favorites, name="favorites"),
+    path("contato/", contato, name="contato"),
 ]

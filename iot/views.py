@@ -2,8 +2,9 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+from datetime import datetime
 
-from .models import Card, Favorite
+from .models import Card, Favorite, MensagemDeContato
 
 
 def index(request):
@@ -81,3 +82,21 @@ def favorites(request):
     # Recupera os favoritos do usuário e renderiza a página de favoritos.
     user_favorites = Favorite.objects.select_related("card").filter(user=request.user)
     return render(request, "iot/favorites.html", {"user_favorites": user_favorites})
+
+
+def contato(request):
+    if request.method == "POST":
+        nome = request.POST["name"]
+        email = request.POST["email"]
+        mensagem = request.POST["message"]
+        data_envio = datetime.now()
+
+        mensagem_contato = MensagemDeContato(
+            nome=nome, email=email, mensagem=mensagem, data_envio=data_envio
+        )
+        mensagem_contato.save()
+        return render(request, "iot/contato_sucesso.html")
+
+        # Pode adicionar a lógica para enviar um e-mail aqui, se necessário.
+
+    return render(request, "iot/contato.html")

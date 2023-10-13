@@ -1,5 +1,5 @@
 from django.contrib import admin
-from iot.models import Card, Circuito, MateriaisExperimento
+from iot.models import Card, Circuito, MateriaisExperimento, MensagemDeContato
 
 
 class CircuitoInline(admin.StackedInline):
@@ -19,3 +19,4 @@ class CardAdmin(admin.ModelAdmin):
 
 admin.site.register(Circuito)
 admin.site.register(MateriaisExperimento)
+admin.site.register(MensagemDeContato)
