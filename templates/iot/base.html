@@ -14,9 +14,10 @@
             theme: {
                 extend: {
                     colors: {
-                        azul: {
-                            claro: '#C5DFFF',
+                        cores: {
+                            azure: ' #F0FFFF',
                             escuro: '#061E3C',
+                            cinza: '#111827',
                             hover: '#1057B0'
                         },
                     },
@@ -36,9 +37,10 @@
 
 
     {% block extra_head %}{% endblock %}
+
 </head>
 
-<body class="bg-azul-claro text-azul-escuro font-inter">
+<body class="bg-cores-azure text-cores-escuro font-inter">
 
     <!-- Menu de navegação -->
 
@@ -57,7 +59,7 @@
     {% if user.is_authenticated %}
 
     <!-- Script do ícone de favoritos -->
-    <script>
+    {% comment %} <script>
         $(document).ready(function () {
             $(".favorite-button").on("click", function (event) {
                 event.preventDefault(); //evita o comportamento padrão de um link 
@@ -87,7 +89,7 @@
                 });
             });
         });
-    </script>
+    </script> {% endcomment %}
     {% endif %}
 </body>
 
