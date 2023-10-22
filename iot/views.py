@@ -2,8 +2,9 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+from datetime import datetime
 
-from .models import Card, Favorite
+from .models import Card, Favorite, MensagemDeContato
 
 
 def index(request):
@@ -39,15 +40,10 @@ def cadastro(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            # Autenticar o usuário após o cadastro
-            username = form.cleaned_data.get("username")
-            password = form.cleaned_data.get("password1")
-            user = authenticate(username=username, password=password)
-            if user:
-                login(request, user)
-                return redirect(
-                    "index"
-                )  # Redirecionar para a página inicial após o cadastro
+            login(request, user)
+            return redirect(
+                "index"
+            )  # Redirecione para a página inicial ou outra página desejada após o registro
     else:
         form = UserCreationForm()
     return render(request, "iot/cadastro.html", {"form": form})
@@ -74,18 +70,33 @@ def add_to_favorites(request, card_id):
             # O card não estava nos favoritos, então o usuário deseja adicioná-lo
             Favorite.objects.create(user=request.user, card=card)
 
-    # Adicione instruções de depuração para verificar se a view está sendo chamada
-    # corretamente e se as operações estão ocorrendo como esperado.
-    print(f"Card ID: {card_id}")
-    print(f"User: {request.user}")
+        # Atualize o estado de favorito do card e salve-o
+        card.favorito = not card.favorito
+        card.save()
 
-    # Adicione mais instruções de depuração conforme necessário.
-
-    return redirect("index")
+    return redirect(request.META.get("HTTP_REFERER"))
 
 
 @login_required
 def favorites(request):
-    # recupera os favoritos do usuário e renderiza a página de favoritos.
-    user_favorites = Favorite.objects.filter(user=request.user)
+    # Recupera os favoritos do usuário e renderiza a página de favoritos.
+    user_favorites = Favorite.objects.select_related("card").filter(user=request.user)
     return render(request, "iot/favorites.html", {"user_favorites": user_favorites})
+
+
+def contato(request):
+    if request.method == "POST":
+        nome = request.POST["name"]
+        email = request.POST["email"]
+        mensagem = request.POST["message"]
+        data_envio = datetime.now()
+
+        mensagem_contato = MensagemDeContato(
+            nome=nome, email=email, mensagem=mensagem, data_envio=data_envio
+        )
+        mensagem_contato.save()
+        return render(request, "iot/contato_sucesso.html")
+
+        # Pode adicionar a lógica para enviar um e-mail aqui, se necessário.
+
+    return render(request, "iot/contato.html")

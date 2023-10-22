@@ -1,0 +1,19 @@
+{% extends 'iot/base.html' %}
+
+{% block content %}
+<div class="max-w-md w-full space-y-8">
+  <div>
+    <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+      Mensagem Enviada com Sucesso!
+    </h2>
+  </div>
+  <div class="text-center">
+    <p class="text-gray-600">
+      Obrigado por entrar em contato conosco. Sua mensagem foi recebida com sucesso.
+    </p>
+    <p class="text-gray-600">
+      Retornar para a <a href="{% url 'index' %}">Página Inicial</a>.
+    </p>
+  </div>
+</div>
+{% endblock %}

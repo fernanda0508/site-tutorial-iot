@@ -9,14 +9,12 @@
         <div class="flex items-center justify-between">
           <div class="font-bold text-xl mb-2">{{ card.titulo }}</div>
           {% if user.is_authenticated %}
-          <a href="{% url 'add_to_favorites' card.id %}" class="favorite-button" data-card-id="{{ card.id }}">
+          <a href="{% url 'add_to_favorites' card.id %}" class="favorite-button">
             <!-- Use a classe 'heart-icon' para o ícone do coração -->
-            <i class="heart-icon text-2xl {% if card.is_favorite.user %}fas{% else %}far{% endif %} fa-heart"
-              data-card-id="{{ card.id }}"></i>
+            <i class="heart-icon text-2xl {% if card.favorito %}fas{% else %}far{% endif %} fa-heart"></i>
           </a>
           {% else %}
           <a href="{% url 'login' %}" class="favorite-button" data-card-id="{{ card.id }}">
-            <!-- Use a classe 'heart-icon' para o ícone do coração -->
             <i class="heart-icon text-2xl far fa-heart" data-card-id="{{ card.id }}"></i>
           </a>
           {% endif %}

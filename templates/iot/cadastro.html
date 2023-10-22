@@ -27,28 +27,47 @@
           <label for="username" class="sr-only">Nome de Usuário</label>
           <input id="username" name="username" type="text" required
             class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-            placeholder="Nome de Usuário">
+            placeholder="Nome de Usuário" value="{{ form.username.value }}">
+          {% if form.username.errors %}
+          <p class="text-red-500">{{ form.username.errors }}</p>
+          {% endif %}
         </div>
+
         <div>
           <label for="email" class="sr-only">Email</label>
           <input id="email" name="email" type="email" required
             class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-            placeholder="Email">
+            placeholder="Email" value="{{ form.email.value }}">
+          {% if form.email.errors %}
+          <p class="text-red-500">{{ form.email.errors }}</p>
+          {% endif %}
+        </div>
+
+        <div>
+          <label for="password1" class="sr-only">Senha</label>
+          <input id="password1" name="password1" type="password" required
+            class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            placeholder="Senha" value="{{ form.password1.value }}">
+          {% if form.password1.errors %}
+          <p class="text-red-500">{{ form.password1.errors }}</p>
+          {% endif %}
+        </div>
+
+        <div>
+          <label for="password2" class="sr-only">Confirmar Senha</label>
+          <input id="password2" name="password2" type="password" required
+            class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            placeholder="Confirmar Senha" value="{{ form.password2.value }}">
+          {% if form.password2.errors %}
+          <p class="text-red-500">{{ form.password2.errors }}</p>
+          {% endif %}
         </div>
         <div>
-          <label for="password" class="sr-only">Senha</label>
-          <input id="password" name="password" type="password" required
-            class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-            placeholder="Senha">
+          <button type="submit"
+            class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            Cadastrar
+          </button>
         </div>
-      </div>
-
-      <div>
-        <button type="submit"
-          class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-          Cadastrar
-        </button>
-      </div>
     </form>
     <div class="text-center">
       <p class="mt-2 text-sm text-gray-600">
