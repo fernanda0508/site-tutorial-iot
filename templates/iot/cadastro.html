@@ -8,32 +8,51 @@
   <title>Cadastro</title>
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Inclua os estilos do Tailwind CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css" rel="stylesheet">
-</head>
+  <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    cores: {
+                        escuro: '#061E3C',
+                    },
+                },
+                fontFamily: {
+                    inter: ['Inter', 'sans-serif'],
+                },
+            },
+        },
+    };
+  </script>
 
-<body class="bg-gray-100 flex items-center justify-center h-screen">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-  <div class="max-w-md w-full space-y-8 bg-cores-escuro">
-    
-    <div>
-      <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Cadastro</h2>
-    </div>
-    
-    <form class="mt-8 space-y-6" method="POST">
+
+<body class="bg-gray-200 flex items-center justify-center h-screen">
+
+  <div class="bg-cores-escuro p-8 rounded shadow-2xl w-96">
+
+    <h2 class="text-center text-3xl font-inter text-gray-100">Cadastro</h2>
+
+    <form class="space-y-6" method="POST">
       {% csrf_token %}
-      <div class="rounded-md shadow-sm -space-y-px">
-        <div>
-          <label for="username" class="sr-only">Nome de Usuário</label>
+    
+      <div>
+        
+        <!--Usuário-->
+        <div class="mb-2"> 
+          <label for="username" class="sr-only">Usuário</label> <!--Leitores de tela-->
           <input id="username" name="username" type="text" required
-            class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-            placeholder="Nome de Usuário" value="{{ form.username.value }}">
+            class="appearance-none relative block w-full px-3 py-2 border border-gray-300 rounded-t-lg placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            placeholder="Usuário" value="{{ form.username.value }}">
           {% if form.username.errors %}
           <p class="text-red-500">{{ form.username.errors }}</p>
           {% endif %}
         </div>
 
-        <div>
+        <!--Email-->
+        <div class="mb-2">
           <label for="email" class="sr-only">Email</label>
           <input id="email" name="email" type="email" required
             class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
@@ -43,34 +62,39 @@
           {% endif %}
         </div>
 
-        <div>
+        <!--Senha-->
+        <div class="mb-2">
           <label for="password1" class="sr-only">Senha</label>
           <input id="password1" name="password1" type="password" required
-            class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
             placeholder="Senha" value="{{ form.password1.value }}">
           {% if form.password1.errors %}
           <p class="text-red-500">{{ form.password1.errors }}</p>
           {% endif %}
         </div>
 
-        <div>
+        <!--Confirmar Senha-->
+        <div class="mb-6">
           <label for="password2" class="sr-only">Confirmar Senha</label>
           <input id="password2" name="password2" type="password" required
-            class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
             placeholder="Confirmar Senha" value="{{ form.password2.value }}">
           {% if form.password2.errors %}
           <p class="text-red-500">{{ form.password2.errors }}</p>
           {% endif %}
         </div>
+
+        <!-- Botão de login -->
         <div>
           <button type="submit"
-            class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            class="group relative w-full flex justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-indigo-500">
             Cadastrar
           </button>
         </div>
     </form>
+
     <div class="text-center">
-      <p class="mt-2 text-sm text-gray-600">
+      <p class="mt-1 text-sm text-gray-400">
         Já tem uma conta? <a href="{% url 'login' %}" class="font-medium text-indigo-600 hover:text-indigo-500">
           Faça Login
         </a>

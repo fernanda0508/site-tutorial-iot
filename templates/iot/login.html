@@ -1,44 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html lang="pt-br">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
-  <!-- Inclua os estilos do Tailwind CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    cores: {
+                        escuro: '#061E3C',
+                    },
+                },
+                fontFamily: {
+                    inter: ['Inter', 'sans-serif'],
+                },
+            },
+        },
+    };
+  </script>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
-<body class="bg-gray-100 flex items-center justify-center h-screen">
-  <div class="bg-white p-8 rounded shadow-md w-96">
-    <h2 class="text-2xl font-semibold mb-6">Login</h2>
+<body class="bg-gray-200 flex items-center justify-center h-screen">
+  
+  <div class="bg-cores-escuro p-8 rounded shadow-2xl w-96">
+    
+    <h2 class="text-center text-2xl font-inter text-gray-100">Login</h2>
+
     {% if error_message %}
-    <p class="text-red-500 mb-4">{{ error_message }}</p>
+    <p class="text-red-500 mt-3 text-sm">{{ error_message }}</p>
     {% endif %}
-    <form action="" method="post">
+
+    <form class="space-y-6" action="" method="post">
       {% csrf_token %}
-      <!-- Campo de usuário -->
-      <div class="mb-4">
-        <label for="username" class="block text-sm font-medium text-gray-700">Usuário</label>
-        <input type="text" name="username" id="username"
-          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
-      </div>
-      <!-- Campo de senha -->
-      <div class="mb-6">
-        <label for="password" class="block text-sm font-medium text-gray-700">Senha</label>
-        <input type="password" name="password" id="password"
-          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
-      </div>
-      <!-- Botão de login -->
-      <div class="text-center">
-        <button type="submit"
-          class="bg-indigo-500 text-white px-4 py-2 rounded hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:ring-opacity-75">
+      <div>  
+        <!-- Campo de usuário -->
+        <div class="mb-3">
+          <label for="username" class="sr-only">Usuário</label> <!--Leitores de tela-->
+          <input type="text" name="username" id="username" required
+            class="appearance-none relative block w-full px-3 py-2 border border-gray-300 rounded-t-lg placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            placeholder="Usuário" value="{{ form.username.value }}">
+        </div>
+
+        <!-- Campo de senha -->
+        <div class="mb-6">
+          <label for="password" class="sr-only">Senha</label>
+          <input type="password" name="password" id="password" required
+            class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            placeholder="Senha">
+        </div>
+        
+        <!-- Botão de login -->
+        <div>
+          <button type="submit"
+          class="group relative w-full flex justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-indigo-500">
           Entrar
-        </button>
+          </button>
+        </div>
       </div>
     </form>
+
     <div class="text-center">
-      <p class="mt-2 text-sm text-gray-600">
+      <p class="mt-1 text-sm text-gray-400">
         Ainda não tem uma conta? <a href="{% url 'cadastro' %}"
           class="font-medium text-indigo-600 hover:text-indigo-500">
           Faça Cadastro
