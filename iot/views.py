@@ -9,7 +9,14 @@ from .models import Card, Favorite, MensagemDeContato
 
 def index(request):
     cards = Card.objects.all()
-    return render(request, "iot/index.html", {"cards": cards})
+    favorite_card_ids = []
+    if request.user.is_authenticated:
+        favorite_card_ids = request.user.favorite_set.values_list("card_id", flat=True)
+    return render(
+        request,
+        "iot/index.html",
+        {"cards": cards, "favorite_card_ids": favorite_card_ids},
+    )
 
 
 def tutorial_card(request, card_id):
@@ -59,21 +66,12 @@ def buscar(request):
 
 
 def add_to_favorites(request, card_id):
-    card = Card.objects.get(pk=card_id)
-
-    # Verifique se o card já está nos favoritos do usuário
+    card = get_object_or_404(Card, pk=card_id)
     if request.user.is_authenticated:
-        if card.is_favorited_by(request.user):
+        favorite, created = Favorite.objects.get_or_create(user=request.user, card=card)
+        if not created:
             # O card já estava nos favoritos, então agora o usuário deseja removê-lo
-            Favorite.objects.filter(user=request.user, card=card).delete()
-        else:
-            # O card não estava nos favoritos, então o usuário deseja adicioná-lo
-            Favorite.objects.create(user=request.user, card=card)
-
-        # Atualize o estado de favorito do card e salve-o
-        card.favorito = not card.favorito
-        card.save()
-
+            favorite.delete()
     return redirect(request.META.get("HTTP_REFERER"))
 
 

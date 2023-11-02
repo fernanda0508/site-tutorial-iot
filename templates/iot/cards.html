@@ -10,27 +10,24 @@
           <div class="font-bold text-xl mb-2">{{ card.titulo }}</div>
           {% if user.is_authenticated %}
           <a href="{% url 'add_to_favorites' card.id %}" class="favorite-button">
-            <!-- Use a classe 'heart-icon' para o ícone do coração -->
-            <i class="heart-icon text-2xl {% if card.favorito %}fas{% else %}far{% endif %} fa-heart"></i>
+            <i
+              class="heart-icon text-2xl {% if card.id in favorite_card_ids %}fas{% else %}far{% endif %} fa-heart"></i>
           </a>
           {% else %}
-          <a href="{% url 'login' %}" class="favorite-button" data-card-id="{{ card.id }}">
-            <i class="heart-icon text-2xl far fa-heart" data-card-id="{{ card.id }}"></i>
+          <a href="{% url 'login' %}" class="favorite-button">
+            <i class="heart-icon text-2xl far fa-heart"></i>
           </a>
           {% endif %}
+
         </div>
         <p class="text-gray-700 text-base">{{ card.introducao }}</p>
-
       </div>
-      <div class="px-6 pt-4 pb-2">
-        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">#Tag1</span>
-        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">#Tag2</span>
-      </div>
+      <!-- Tags, se houver, podem ser adicionadas aqui -->
     </a>
   </div>
   {% endfor %}
   {% else %}
-  <div class="">
+  <div class="text-center">
     <p>Cards não encontrados</p>
   </div>
   {% endif %}

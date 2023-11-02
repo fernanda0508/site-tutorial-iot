@@ -6,7 +6,6 @@ class Card(models.Model):
     titulo = models.CharField(max_length=100)
     introducao = models.TextField(default="")
     descricao_codigo = models.TextField(default="")
-    favorito = models.BooleanField(default=False)
     codigo = models.TextField(default="")
     conclusao = models.TextField(default="")
     imagem_card = models.ImageField(upload_to="cards/", blank=True)
@@ -18,8 +17,7 @@ class Card(models.Model):
         return self.titulo
 
     def is_favorited_by(self, user):
-        #  verifica se um determinado usuário favoritou o card.
-        return Favorite.objects.filter(card=self, user=user).exists()
+        return self.favorite_set.filter(user=user).exists()
 
 
 class MateriaisExperimento(models.Model):
@@ -35,6 +33,12 @@ class Circuito(models.Model):
 class Favorite(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     card = models.ForeignKey(Card, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = (
+            "user",
+            "card",
+        )  # Isso garante que a combinação de usuário e card seja única
 
     def __str__(self):
         return f"{self.user.username} - {self.card.titulo}"

@@ -10,23 +10,23 @@
 
   <script>
     tailwind.config = {
-        theme: {
-            extend: {
-                colors: {
-                    cores: {
-                        escuro: '#061E3C',
-                    },
-                },
-                fontFamily: {
-                    inter: ['Inter', 'sans-serif'],
-                },
+      theme: {
+        extend: {
+          colors: {
+            cores: {
+              escuro: '#061E3C',
             },
+          },
+          fontFamily: {
+            inter: ['Inter', 'sans-serif'],
+          },
         },
+      },
     };
   </script>
 
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
 <body class="bg-gray-200 flex items-center justify-center h-screen">
@@ -37,17 +37,17 @@
 
     <form class="space-y-6" method="POST">
       {% csrf_token %}
-    
+
       <div>
-        
+
         <!--Usuário-->
-        <div class="mb-2"> 
-          <label for="username" class="sr-only">Usuário</label> <!--Leitores de tela-->
+        <div class="mb-2">
+          <label for="username" class="sr-only">Usuário</label>
           <input id="username" name="username" type="text" required
             class="appearance-none relative block w-full px-3 py-2 border border-gray-300 rounded-t-lg placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-            placeholder="Usuário" value="{{ form.username.value }}">
+            placeholder="Usuário" autocomplete="username" />
           {% if form.username.errors %}
-          <p class="text-red-500">{{ form.username.errors }}</p>
+          <h2 class="text-white">{{ form.username.errors }}</h2>
           {% endif %}
         </div>
 
@@ -56,9 +56,9 @@
           <label for="email" class="sr-only">Email</label>
           <input id="email" name="email" type="email" required
             class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-            placeholder="Email" value="{{ form.email.value }}">
+            placeholder="Email" autocomplete="email" />
           {% if form.email.errors %}
-          <p class="text-red-500">{{ form.email.errors }}</p>
+          <h2 class="text-white">{{ form.email.errors }}</h2>
           {% endif %}
         </div>
 
@@ -66,10 +66,10 @@
         <div class="mb-2">
           <label for="password1" class="sr-only">Senha</label>
           <input id="password1" name="password1" type="password" required
-            class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-            placeholder="Senha" value="{{ form.password1.value }}">
+            class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            placeholder="Senha" autocomplete="new-password" />
           {% if form.password1.errors %}
-          <p class="text-red-500">{{ form.password1.errors }}</p>
+          <h2 class="text-white">{{ form.password1.errors }}</h2>
           {% endif %}
         </div>
 
@@ -78,9 +78,9 @@
           <label for="password2" class="sr-only">Confirmar Senha</label>
           <input id="password2" name="password2" type="password" required
             class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-lg focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-            placeholder="Confirmar Senha" value="{{ form.password2.value }}">
+            placeholder="Confirmar Senha" autocomplete="new-password" />
           {% if form.password2.errors %}
-          <p class="text-red-500">{{ form.password2.errors }}</p>
+          <h2 class="text-white">{{ form.password2.errors }}</h2>
           {% endif %}
         </div>
 
