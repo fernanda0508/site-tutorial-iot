@@ -1,19 +1,26 @@
 {% extends 'iot/base.html' %}
 
 {% block content %}
-<div class="max-w-md w-full space-y-8">
-  <div>
-    <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
-      Mensagem Enviada com Sucesso!
-    </h2>
-  </div>
-  <div class="text-center">
-    <p class="text-gray-600">
-      Obrigado por entrar em contato conosco. Sua mensagem foi recebida com sucesso.
-    </p>
-    <p class="text-gray-600">
-      Retornar para a <a href="{% url 'index' %}">Página Inicial</a>.
-    </p>
+<div class="flex items-center justify-center h-screen bg-gray-100">
+  <div class="p-6 max-w-lg w-full bg-white rounded-lg shadow-md">
+    <div class="text-center">
+      <h2 class="text-3xl font-extrabold text-gray-900">
+        Mensagem Enviada com Sucesso!
+      </h2>
+      <p class="mt-4 text-lg text-gray-600">
+        Obrigado por entrar em contato conosco. Sua mensagem foi recebida com sucesso.
+      </p>
+      <p class="mt-2 text-lg text-gray-600">
+        Retornar para a <a href="{% url 'index' %}"
+          class="text-indigo-600 hover:text-indigo-500 transition duration-300 ease-in-out">Página Inicial</a>.
+      </p>
+      <div class="mt-6">
+        <a href="{% url 'index' %}"
+          class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-500 transition duration-300 ease-in-out">
+          Voltar ao Início
+        </a>
+      </div>
+    </div>
   </div>
 </div>
 {% endblock %}

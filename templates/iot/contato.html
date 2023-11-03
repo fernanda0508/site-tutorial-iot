@@ -1,41 +1,47 @@
 {% extends 'iot/base.html' %}
 
 {% block content %}
-<div class="max-w-md w-full space-y-8">
-  <div>
-    <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
-      Formulário de Contato
-    </h2>
+<div class="flex items-center justify-center min-h-screen bg-gray-100">
+  <div class="max-w-md w-full space-y-8 p-10 bg-white rounded-xl shadow-lg z-10">
+    <div class="text-center">
+      <h2 class="mt-6 text-3xl font-extrabold text-gray-900">
+        Formulário de Contato
+      </h2>
+      <p class="mt-2 text-sm text-gray-500">
+        Preencha o formulário abaixo e entraremos em contato com você.
+      </p>
+    </div>
+    <form class="mt-8 space-y-6" method="POST" onsubmit="return validarForm()">
+      {% csrf_token %}
+      <input type="hidden" name="remember" value="true">
+      <div class="rounded-md shadow-sm">
+        <div>
+          <label for="name" class="sr-only">Nome</label>
+          <input id="name" name="name" type="text"
+            class="appearance-none rounded-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            placeholder="Nome" value="{{ request.POST.name }}">
+        </div>
+        <div class="mt-2">
+          <label for="email" class="sr-only">Email</label>
+          <input id="email" name="email" type="email"
+            class="appearance-none rounded-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            placeholder="Email" value="{{ request.POST.email }}">
+        </div>
+        <div class="mt-2">
+          <label for="message" class="sr-only">Mensagem</label>
+          <textarea id="message" name="message" rows="4"
+            class="appearance-none rounded-none relative block w-full px-3 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            placeholder="Sua mensagem">{{ request.POST.message }}</textarea>
+        </div>
+      </div>
+      <div>
+        <button type="submit"
+          class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+          Enviar Mensagem
+        </button>
+      </div>
+    </form>
   </div>
-  <form class="mt-8 space-y-6" method="POST">
-    {% csrf_token %}
-    <div class="rounded-md shadow-sm -space-y-px">
-      <div>
-        <label for="name" class="sr-only">Nome</label>
-        <input id="name" name="name" type="text" required
-          class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-          placeholder="Nome" value="{{ request.POST.name }}">
-      </div>
-      <div>
-        <label for="email" class="sr-only">Email</label>
-        <input id="email" name="email" type="email" required
-          class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-          placeholder="Email" value="{{ request.POST.email }}">
-      </div>
-      <div>
-        <label for="message" class="sr-only">Mensagem</label>
-        <textarea id="message" name="message" rows="4" required
-          class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-          placeholder="Sua mensagem">{{ request.POST.message }}</textarea>
-      </div>
-    </div>
-    <div>
-      <button type="submit"
-        class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-        Enviar
-      </button>
-    </div>
-  </form>
 </div>
 
 <script>
@@ -60,10 +66,14 @@
     if (mensagem === "") {
       alert("Por favor, escreva sua mensagem.");
       return false; // Impede o envio do formulário
+    } else if (mensagem.length < 4) { // Use .length para obter o comprimento da string
+      alert("Por favor, detalhe mais a sua mensagem.");
+      return false;
     }
 
     // Se todas as validações passarem, o formulário será enviado
     return true;
+
   }
 </script>
 {% endblock %}
