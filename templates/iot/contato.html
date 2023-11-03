@@ -46,15 +46,24 @@
 
 <script>
   function validarForm() {
-    // Validação do campo Nome
+    // Obter valores dos campos
     var nome = document.getElementById("name").value;
+    var email = document.getElementById("email").value;
+    var mensagem = document.getElementById("message").value;
+
+    // Verifica se todos os campos estão vazios
+    if (nome === "" && email === "" && mensagem === "") {
+      alert("Por favor, preencha os campos do formulário.");
+      return false; // Impede o envio do formulário
+    }
+
+    // Validação do campo Nome
     if (nome === "") {
       alert("Por favor, preencha o campo Nome.");
       return false; // Impede o envio do formulário
     }
 
     // Validação do campo Email
-    var email = document.getElementById("email").value;
     var emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     if (!emailRegex.test(email)) {
       alert("Por favor, insira um endereço de e-mail válido.");
@@ -62,18 +71,17 @@
     }
 
     // Validação do campo Mensagem
-    var mensagem = document.getElementById("message").value;
     if (mensagem === "") {
       alert("Por favor, escreva sua mensagem.");
       return false; // Impede o envio do formulário
-    } else if (mensagem.length < 4) { // Use .length para obter o comprimento da string
+    } else if (mensagem.length < 4) {
       alert("Por favor, detalhe mais a sua mensagem.");
       return false;
     }
 
     // Se todas as validações passarem, o formulário será enviado
     return true;
-
   }
 </script>
+
 {% endblock %}

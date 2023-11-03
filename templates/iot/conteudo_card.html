@@ -1,6 +1,7 @@
 {% extends 'iot/base.html' %}
 {% load static %}
 
+
 {% block content %}
 <main class="container mx-auto mt-4  ">
   <div class="max-w-screen-lg mx-auto text-justify font-sans bg-white bg-opacity-80 p-4 shadow-lg rounded-lg">
@@ -37,14 +38,16 @@
     <div>
       <h1 class="font-bold mt-4 mb-4">Código do Experimento</h1>
       <p>{{ card.descricao_codigo }}</p>
-      <div class="bg-slate-700 p-4 mt-4 rounded-lg"> <!-- Fundo preto para a área do código -->
-        <pre class="text-white">
-          <code class="language-html "> 
-            {{ card.codigo }}
-          </code>
-        </pre>
+
+      <div class="max-w-lg">
+        <div class="bg-gray-800 p-4 rounded-lg mt-6 overflow-auto">
+          <pre class="text-white whitespace-pre-wrap">{{ card.codigo }}</pre>
+        </div>
+
+
       </div>
     </div>
+
 
 
     <div>
@@ -69,8 +72,8 @@
       </table>
     </div>
 
-
-    <img src="{{ card.imagem_circuito.url }}" alt="{{ card.titulo }}" class="my-4 rounded-lg w-full">
+    <h1 class="font-bold mt-4 mb-4">Circuito Montado</h1>
+    <img src="{{ card.imagem_circuito.url }}" alt="{{ card.titulo }}" class="my-4 rounded-lg w-3/4">
   </div>
 
 
