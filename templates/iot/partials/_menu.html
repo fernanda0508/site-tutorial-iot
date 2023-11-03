@@ -17,7 +17,10 @@
                 id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown"
                 data-dropdown-placement="bottom">
                 <span class="sr-only">Open user menu</span>
-                <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-3.jpg" alt="user photo">
+                <!-- Substituindo a imagem pelo primeiro caractere do nome do usuário -->
+                <div class="w-8 h-8 rounded-full bg-gray-700 text-white flex items-center justify-center">
+                    {{ user.username|first|upper }}
+                </div>
             </button>
 
             <!-- Conteudo dentro da foto -->
