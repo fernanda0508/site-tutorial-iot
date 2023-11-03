@@ -21,9 +21,8 @@
           {% endif %}
 
         </div>
-        <p class="text-gray-700 text-base">{{ card.introducao }}</p>
+        <p class="text-gray-700 text-base">{{ card.introducao|truncatechars:200 }}</p>
       </div>
-      <!-- Tags, se houver, podem ser adicionadas aqui -->
     </a>
   </div>
   {% endfor %}
