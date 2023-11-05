@@ -4,12 +4,15 @@
   {% for card in cards %}
   <div class="max-w-sm rounded overflow-hidden shadow-lg">
     <a href="{% url 'tutorial-card' card.id %}" class="block">
-      <img class="w-full" src="{{ card.imagem_card.url }}" alt="{{ card.titulo }}">
+      <img class="w-32 h-32 w-full" src="{{ card.imagem_card.url }}" alt="{{ card.titulo }}">
       <div class="px-6 py-4">
+
+        <!--Titulo de card-->
         <div class="flex items-center justify-between">
           <div class="font-bold text-xl mb-2">{{ card.titulo }}</div>
           {% if user.is_authenticated %}
           <a href="{% url 'add_to_favorites' card.id %}" class="favorite-button">
+            
             <!-- se o Card é um favorito do usuário o coração fica preenchido, se não, fica vazio -->
             <i
               class="heart-icon text-2xl {% if card.id in favorite_card_ids %}fas{% else %}far{% endif %} fa-heart"></i>
@@ -19,8 +22,9 @@
             <i class="heart-icon text-2xl far fa-heart"></i>
           </a>
           {% endif %}
-
         </div>
+          
+        <!--Texto do card-->
         <p class="text-gray-700 text-base">{{ card.introducao|truncatechars:200 }}</p>
       </div>
     </a>
