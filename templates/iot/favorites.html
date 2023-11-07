@@ -6,7 +6,7 @@
   {% for favorite in user_favorites %}
   <div class="max-w-sm rounded overflow-hidden shadow-lg">
     <a href="{% url 'tutorial-card' favorite.card.id %}" class="block">
-      <img class="w-32 h-32 w-full" src="{{ favorite.card.imagem_card.url }}" alt="{{ favorite.card.titulo }}">
+      <img class="h-41 w-full" src="{{ favorite.card.imagem_card.url }}" alt="{{ favorite.card.titulo }}">
       <div class="px-6 py-4">
         <div class="flex items-center justify-between">
           <div class="font-bold text-xl mb-2">{{ favorite.card.titulo }}</div>

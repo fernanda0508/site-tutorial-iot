@@ -1,10 +1,10 @@
 <!-- Lista de Cards -->
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-6 mb-6">
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-6 mb-6">
   {% if cards %}
   {% for card in cards %}
-  <div class="max-w-sm rounded overflow-hidden shadow-lg">
+  <div class="max-w-sm rounded-md overflow-hidden shadow-lg">
     <a href="{% url 'tutorial-card' card.id %}" class="block">
-      <img class="w-32 h-32 w-full" src="{{ card.imagem_card.url }}" alt="{{ card.titulo }}">
+      <img class="rounded-t-md w-full" src="{{ card.imagem_card.url }}" alt="{{ card.titulo }}">
       <div class="px-6 py-4">
 
         <!--Titulo de card-->
@@ -23,7 +23,7 @@
           </a>
           {% endif %}
         </div>
-          
+
         <!--Texto do card-->
         <p class="text-gray-700 text-base">{{ card.introducao|truncatechars:200 }}</p>
       </div>
